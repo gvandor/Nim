@@ -1,18 +1,14 @@
-#!/usr/bin/nim
-#-*- coding:utf-8 -*-
-# program: clean.nim
-echo ("Tudni akarod, mennyi a tárhely? Megmutatom.")
-import os
-os.system ("df -h")
-def clean():
-    c= input("akarod, hogy takarítsak kicsit?, ha igen akkor adj egy karaktert + enter, ha nem akkor csak enter ")
-    if c:
-        os.system ("sudo pacman -Sc --noconfirm")
-    else:
-        print ("Rendben akkor most nem. ")
+# Bash parancs behívása:
+import osproc, strutils
+echo "Tudni akarod, mennyi a tárhely? Megmutatom."
+discard execCmd("df -h")
+# függvény létrehozása:
+proc clean() =
+  echo "Akarod, hogy takarítsak kicsit? Ha igen akkor adj egy karaktert + enter, ha nem akkor csak enter"
+# c változó definiálása:
+  let c = readLine(stdin)
+  if c.len > 0:
+    discard execCmd("sudo pacman -Sc --noconfirm")
+  else:
+    echo "Rendben akkor most nem."
 clean()
-
-
-# os.system ("")
-# os.system ("")
-# os.system ("")
